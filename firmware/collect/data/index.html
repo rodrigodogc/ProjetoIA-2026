@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e14">
+<title>Sensor de Vibração</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234cc2ff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-4l-3 9L9 3l-3 9H2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ícones (estilo Lucide, traço 2px). Uso: <svg class="i"><use href="#i-nome"/></svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M8 17v-5"/><path d="M13 17V7"/><path d="M18 17v-8"/></symbol>
+  <symbol id="i-rec" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M6 7l1 13h10l1-13"/><path d="M9 7V4h6v3"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M12 21V8"/><path d="m6 14 6-6 6 6"/><path d="M5 3h14"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M9 16a5 5 0 0 1 6 0"/><path d="M12 20h.01"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></symbol>
+  <symbol id="i-xcircle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6"/><path d="m15 9-6 6"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 4a1 1 0 0 1 1-1h8.2a1 1 0 0 1 .7.3l8 8a1 1 0 0 1 0 1.4l-7.2 7.2a1 1 0 0 1-1.4 0l-8-8a1 1 0 0 1-.3-.7z"/><circle cx="8" cy="8" r="1.3"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0"/><path d="m12 14 4-5"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M9 2h6"/></symbol>
+  <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 5 5 6 5 9s-5 4-5 9"/><path d="M17 3c0 5-5 6-5 9s5 4 5 9"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8 7.5 20 18"/><path d="M8 16.5 20 6"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5.5 5h13L21 13v6H3v-6z"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19a4.5 4.5 0 1 0-1-8.9A6 6 0 0 0 4.6 12 4 4 0 0 0 6 19z"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M5 20h14"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 4v7h-7"/></symbol>
+  <symbol id="i-radio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M7.8 16.2a6 6 0 0 1 0-8.4"/><path d="M16.2 7.8a6 6 0 0 1 0 8.4"/><path d="M4.9 19.1a10 10 0 0 1 0-14.2"/><path d="M19.1 4.9a10 10 0 0 1 0 14.2"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="brand">
+    <span class="logo"><svg class="i"><use href="#i-activity"/></svg></span>
+    <span class="name">Coletor de Vibração<small>ESP32 → dataset</small></span>
+  </div>
+  <div class="pills">
+    <span id="rec-pill" class="pill rec" hidden><span class="t"></span></span>
+    <span id="pill-dev" class="pill off"><svg class="i"><use href="#i-cpu"/></svg><span class="t">Dispositivo desconectado</span></span>
+    <span id="pill-rate" class="pill" title="Taxa de amostragem medida / declarada pelo dispositivo"><svg class="i"><use href="#i-clock"/></svg><span class="t">— Hz</span></span>
+    <span id="pill-lost" class="pill" title="Pacotes perdidos desde que o dispositivo conectou"><svg class="i"><use href="#i-alert"/></svg><span class="t">0 perdidos</span></span>
+    <span id="pill-clip" class="pill" title="Amostras no limite do fundo de escala do sensor"><svg class="i"><use href="#i-clip"/></svg><span class="t">0 saturadas</span></span>
+    <button id="btn-drive" class="pill" title="Pasta do Google Drive"><svg class="i"><use href="#i-cloud"/></svg><span class="t">Drive</span></button>
+    <button id="btn-net" class="pill" title="Wi-Fi do roteador (opcional)"><svg class="i"><use href="#i-wifi"/></svg><span class="t">Rede</span></button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="stack">
+
+    <div class="card">
+      <div class="card-head">
+        <h2><svg class="i"><use href="#i-activity"/></svg>Forma de onda</h2>
+        <div class="tools">
+          <label class="chk" style="--c:var(--x)"><input type="checkbox" id="ax-x" checked><span>X</span></label>
+          <label class="chk" style="--c:var(--y)"><input type="checkbox" id="ax-y" checked><span>Y</span></label>
+          <label class="chk" style="--c:var(--z)"><input type="checkbox" id="ax-z" checked><span>Z</span></label>
+          <select id="w-window" title="Janela de tempo">
+            <option value="1">1 s</option><option value="2" selected>2 s</option>
+            <option value="5">5 s</option><option value="10">10 s</option>
+          </select>
+          <select id="w-scale" title="Escala vertical">
+            <option value="auto" selected>Auto</option><option value="0.05">±0,05 g</option>
+            <option value="0.2">±0,2 g</option><option value="0.5">±0,5 g</option>
+            <option value="1">±1 g</option><option value="2">±2 g</option><option value="4">±4 g</option>
+          </select>
+          <label class="chk plain" title="Subtrai a média (gravidade) de cada eixo"><input type="checkbox" id="w-dc" checked><span>Remover DC</span></label>
+          <button class="btn sm" id="w-pause"><svg class="i"><use href="#i-pause"/></svg><span>Pausar</span></button>
+        </div>
+      </div>
+      <canvas id="cv-wave" class="plot tall"></canvas>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2><svg class="i"><use href="#i-bars"/></svg>Espectro</h2>
+        <div class="tools">
+          <select id="s-axis" title="Eixo">
+            <option value="all">Todos</option><option value="x">X</option><option value="y">Y</option><option value="z" selected>Z</option>
+          </select>
+          <select id="s-scale" title="Escala vertical"><option value="lin">Linear</option><option value="log" selected>Log</option></select>
+          <select id="s-fmax" title="Frequência máxima exibida">
+            <option value="0">Tudo</option><option value="400">400 Hz</option><option value="200">200 Hz</option>
+            <option value="100">100 Hz</option><option value="50">50 Hz</option>
+          </select>
+        </div>
+      </div>
+      <canvas id="cv-spec" class="plot"></canvas>
+      <table class="axes">
+        <thead><tr><th></th><th>RMS</th><th>Média (g)</th><th>Pico a pico</th><th>Pico dominante</th><th>≈ rpm se 1×</th></tr></thead>
+        <tbody id="axes-body"></tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <aside class="stack">
+
+    <div class="card">
+      <div class="card-head"><h2><svg class="i"><use href="#i-rec"/></svg>Gravação</h2></div>
+      <form id="rec-form" autocomplete="off">
+        <label><span class="lbl"><svg class="i"><use href="#i-tag"/></svg>Classe</span>
+          <input id="f-label" list="dl-labels" placeholder="ex.: desbalanceado_leve" required>
+          <datalist id="dl-labels"></datalist>
+        </label>
+        <div class="two">
+          <label><span class="lbl"><svg class="i"><use href="#i-gauge"/></svg>Velocidade</span>
+            <input id="f-speed" list="dl-speeds" placeholder="ex.: media">
+            <datalist id="dl-speeds"></datalist>
+          </label>
+          <label><span class="lbl"><svg class="i"><use href="#i-layers"/></svg>Sessão</span>
+            <span class="inline"><input id="f-session" value="1"><button type="button" class="btn sm icon" id="f-session-inc" title="Nova sessão (+1): use depois de remontar o sensor" aria-label="Nova sessão"><svg class="i"><use href="#i-plus"/></svg></button></span>
+          </label>
+        </div>
+        <div class="three">
+          <label><span class="lbl"><svg class="i"><use href="#i-timer"/></svg>Duração (s)</span><input id="f-duration" type="number" min="1" max="3600" value="90"></label>
+          <label><span class="lbl"><svg class="i"><use href="#i-hourglass"/></svg>Atraso (s)</span><input id="f-delay" type="number" min="0" max="120" value="5" title="Tempo para você se afastar antes de começar"></label>
+          <label><span class="lbl"><svg class="i"><use href="#i-scissors"/></svg>Descartar (s)</span><input id="f-trim" type="number" min="0" max="30" step="0.5" value="2" title="Início e fim a ignorar no treino"></label>
+        </div>
+        <label><span class="lbl"><svg class="i"><use href="#i-pencil"/></svg>Notas</span>
+          <textarea id="f-notes" rows="2" placeholder="massa colada, parafuso 1 volta frouxo, 12 V…"></textarea>
+        </label>
+        <div class="btns">
+          <button type="submit" class="btn primary" id="btn-start" disabled><svg class="i"><use href="#i-rec"/></svg>Gravar</button>
+          <button type="button" class="btn" id="btn-stop" disabled><svg class="i"><use href="#i-stop"/></svg>Parar e salvar</button>
+          <button type="button" class="btn ghost" id="btn-cancel" disabled><svg class="i"><use href="#i-x"/></svg>Cancelar</button>
+        </div>
+      </form>
+      <div class="progress" id="rec-progress" hidden><div id="rec-bar"></div></div>
+      <p class="hint status" id="rec-msg"><svg class="i"><use href="#i-info"/></svg><span>Conecte o dispositivo para gravar.</span></p>
+    </div>
+
+  </aside>
+</main>
+
+<section class="card wide">
+  <div class="card-head">
+    <h2><svg class="i"><use href="#i-list"/></svg>Gravações <span class="sub" id="recs-count"></span></h2>
+    <div class="tools"><span class="sub" id="drive-line"></span><button class="btn sm" id="btn-refresh" title="Recarregar a lista do Drive"><svg class="i"><use href="#i-refresh"/></svg>Atualizar</button></div>
+  </div>
+  <div class="table-wrap">
+    <table class="recs">
+      <thead><tr><th>Início</th><th>Classe</th><th>Vel.</th><th>Sessão</th><th>Duração</th><th>Qualidade</th><th>Drive</th><th>Notas</th><th></th></tr></thead>
+      <tbody id="recs-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<dialog id="dlg">
+  <div class="dlg-head"><h2><svg class="i"><use href="#i-file"/></svg><span id="dlg-title"></span></h2><button class="btn sm" id="dlg-close"><svg class="i"><use href="#i-x"/></svg>Fechar</button></div>
+  <p class="hint" id="dlg-meta"></p>
+  <h3><svg class="i"><use href="#i-activity"/></svg>RMS ao longo do tempo <span class="sub">(faixa escurecida = descartada)</span></h3>
+  <canvas id="cv-rms" class="plot short"></canvas>
+  <h3><svg class="i"><use href="#i-radio"/></svg>Trecho de 2 s (sem DC)</h3>
+  <canvas id="cv-pwave" class="plot short"></canvas>
+  <h3><svg class="i"><use href="#i-bars"/></svg>Espectro médio (trecho útil)</h3>
+  <canvas id="cv-pspec" class="plot short"></canvas>
+</dialog>
+
+<dialog id="dlg-drive">
+  <div class="dlg-head"><h2><svg class="i"><use href="#i-cloud"/></svg>Google Drive</h2><button class="btn sm" id="drive-close"><svg class="i"><use href="#i-x"/></svg>Fechar</button></div>
+  <p class="hint">O Drive é opcional: as gravações ficam guardadas neste aparelho e você baixa pelos botões da lista. Com a senha configurada, cada gravação também é enviada para a pasta do Drive definida no script (veja <b>drive/LEIA-ME.md</b>). Precisa de internet no aparelho: use o Wi-Fi do roteador, não o do sensor.</p>
+  <form id="drive-form" autocomplete="off">
+    <label>URL do aplicativo da Web (termina em /exec)<input id="dr-url" type="url" placeholder="https://script.google.com/macros/s/.../exec"></label>
+    <label>Senha (TOKEN do script)<input id="dr-token" type="password"></label>
+    <label class="row"><input type="checkbox" id="dr-auto" checked>Enviar para o Drive ao terminar cada gravação</label>
+    <div class="btns"><button type="submit" class="btn primary">Salvar</button><button type="button" class="btn" id="dr-test">Testar conexão</button></div>
+    <div id="dr-result" role="status" aria-live="polite"></div>
+    <button type="button" class="lnk" id="dr-skip">Não usar o Drive (só salvar neste aparelho)</button>
+  </form>
+</dialog>
+
+<dialog id="dlg-net">
+  <div class="dlg-head"><h2><svg class="i"><use href="#i-wifi"/></svg>Rede</h2><button class="btn sm" id="net-close"><svg class="i"><use href="#i-x"/></svg>Fechar</button></div>
+  <p class="hint" id="net-info"></p>
+  <form id="net-form" autocomplete="off">
+    <label><span class="lbl">Rede Wi-Fi (SSID)</span><input id="net-ssid" required></label>
+    <label><span class="lbl">Senha</span><input id="net-pass" type="password" placeholder="vazio mantém a atual"></label>
+    <div class="btns"><button type="submit" class="btn primary">Salvar e conectar</button></div>
+  </form>
+</dialog>
+
+<div id="toasts"></div>
+<script src="app.js"></script>
+</body>
+</html>
